@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Register.Data;
 using Register.Models;
@@ -14,6 +15,12 @@ namespace Register.Controllers
         {
             _context = context;
             _notyf = notyf;
+        }
+
+        public async Task<IActionResult> PersonList()
+        {
+            var person = await _context.Persons.Where(x => x.IsActive == true).ToListAsync();
+            return View(person);
         }
 
         [HttpGet]
