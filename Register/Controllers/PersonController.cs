@@ -62,6 +62,57 @@ namespace Register.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult>EditPerson(Guid PersonId)
+        {
+            if(PersonId == Guid.Empty)
+            {
+                return NotFound();
+            }
+
+            var person = await _context.Persons.FirstOrDefaultAsync(x =>x.PersonId == PersonId);
+            if(person == null)
+            {
+                return NotFound();
+            }
+    
+            return View(person);
+        }
         
+        public async Task<IActionResult> EditPerson(Person person)
+        {
+            Person modify = new Person();
+
+            try
+            {
+                modify = await _context.Persons.FirstOrDefaultAsync(x => x.PersonId == person.PersonId);
+
+                if (person != null)
+                {
+                    modify.Name = person.Name;
+
+                    modify.LastName = person.LastName;
+
+                    modify.IdNumber = person.IdNumber;
+
+                    modify.Gender = person.Gender;
+
+                    modify.Title = person.Title;
+
+                }
+
+                await _context.SaveChangesAsync();
+
+                _notyf.Success("Person has been successfully edited!");
+
+            }
+            catch(Exception)
+            {
+                throw new Exception("Error: Person could not be edited");
+            }
+            
+            return View();
+        }
     }
 }

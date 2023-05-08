@@ -2,16 +2,16 @@
 @model Register.Models.Person
 
 @{
-    ViewData["Title"] = "AddPerson";
+    ViewData["Title"] = "EditPerson";
 }
 
 <h4>Person</h4>
-<hr />
 
     <div class="col-md-12">
-        <form asp-action="AddPerson">
+        <form asp-action="EditPerson">
         <div class="row">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PersonId" />
             <div class="form-group col-md-4">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -23,10 +23,10 @@
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group col-md-4">
-                <label asp-for="Gender" class="control-label">Gender</label>
-                <select name="Gender" class="form-control" asp-items="Html.GetEnumSelectList<eGender>()">
-                    <option selected="selected" value="--- Please Select ---">
-                        --- Please select ---
+                <label asp-for="Gender" class="control-label"></label>
+                <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<eGender>()">
+                    <option selected="selected" value="-- please select --">
+                        -- please select --
                     </option>
                 </select>
                 <span asp-validation-for="Gender" class="text-danger"></span>
@@ -34,8 +34,8 @@
             <div class="form-group col-md-4">
                 <label asp-for="Title" class="control-label"></label>
                 <select asp-for="Title" class="form-control" asp-items="Html.GetEnumSelectList<eTitle>()">
-                    <option selected ="selected" value="--Please Select--">
-                        --Please Select-- 
+                    <option selected="selected" value=" -- please select --">
+                        -- please select --
                     </option>
                 </select>
                 <span asp-validation-for="Title" class="text-danger"></span>
@@ -45,14 +45,23 @@
                 <input asp-for="IdNumber" class="form-control" />
                 <span asp-validation-for="IdNumber" class="text-danger"></span>
             </div>
-            
+            <div class="form-group form-check col-md-4 mt-4">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
             </div>
-        <div class="form-group col-md-4 mt-2">
-            <input type="submit" value="Create" class="btn btn-primary" />
-            <a asp-action="PersonList" class="btn btn-outline-dark">Back to List</a>
+            </div>
 
+        <div class="form-group mt-3">
+            <input type="submit" value="Save" class="btn btn-outline-primary" />
+            <a asp-action="PersonList" value="Back" class="btn btn-outline-secondary"> Back</a>
         </div>
         </form>
+    </div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
