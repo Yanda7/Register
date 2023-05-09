@@ -1,0 +1,51 @@
+﻿@using static Register.Enum.Enums;
+@model dynamic
+
+@{
+    ViewData["Title"] = "AddRoster";
+}
+
+<h1>AddRoster</h1>
+
+<h4>Roster</h4>
+<hr />
+
+    <div class="col-md-12">
+        <form asp-action="AddRoster">
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group col-md-4">
+                <label name="Status" class="control-label">Status</label>
+                <select name="Status" class="form-control" asp-items="Html.GetEnumSelectList<eStatus>()">
+                    <option selected ="selected" value=" -- Please Select --"> 
+                        -- Please Select --
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-4" >
+                <label name="PersonId" class="control-label"> Person Name</label>
+                <select name="PersonId" class="form-control"  asp-items="ViewBag.PersonId">
+                    <option selected="selected" value=" -- please select --">
+                        -- please select --
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group mt-2">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="reset" value="Clear" class="btn btn-secondary" />
+        </div>
+        </form>
+    </div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Component.InvokeAsync("Notyf");}
+
+}

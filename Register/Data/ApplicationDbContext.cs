@@ -10,6 +10,8 @@ namespace Register.Data
         }
         public DbSet<Person> Persons { get; set; }
 
+        public DbSet<Roster> Rosters { get; set; }
+
 
     }
 }

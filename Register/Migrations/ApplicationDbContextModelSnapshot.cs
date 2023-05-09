@@ -68,6 +68,38 @@ namespace Register.Migrations
 
                     b.ToTable("Persons");
                 });
+
+            modelBuilder.Entity("Register.Models.Roster", b =>
+                {
+                    b.Property<Guid>("RosterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedOn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Createdby")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedOn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("RosterId");
+
+                    b.ToTable("Rosters");
+                });
 #pragma warning restore 612, 618
         }
     }

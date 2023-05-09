@@ -16,5 +16,14 @@
             Mrs,
             
         }
+
+        public enum eStatus
+        {
+            Absent,
+            Present,
+            Sick,
+            Unkown,
+
+        }
     }
 }

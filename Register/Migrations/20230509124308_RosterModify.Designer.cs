@@ -12,8 +12,8 @@ using Register.Data;
 namespace Register.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230505124307_PersonModify1")]
-    partial class PersonModify1
+    [Migration("20230509124308_RosterModify")]
+    partial class RosterModify
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,6 +70,38 @@ namespace Register.Migrations
                     b.HasKey("PersonId");
 
                     b.ToTable("Persons");
+                });
+
+            modelBuilder.Entity("Register.Models.Roster", b =>
+                {
+                    b.Property<Guid>("RosterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedOn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Createdby")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedOn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("RosterId");
+
+                    b.ToTable("Rosters");
                 });
 #pragma warning restore 612, 618
         }
